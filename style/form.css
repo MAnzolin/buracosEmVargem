@@ -1,0 +1,44 @@
+.modal-content{
+    border: 1px solid #160a48;
+    border-radius: 8px;
+}
+
+.modal-body{
+    padding: 32px;
+}
+
+.form-title{
+    position: relative;
+}
+
+.form-title .close{
+    font-size: 40px;
+    position: absolute;
+    right: 0;
+    top: -16px;
+}
+
+.section {
+    padding: 16px 16px 32px 16px;
+    border: 1px solid #160a48;;
+    border-radius: 8px;
+    margin: 16px 0px;
+}
+
+.btn-rows{
+    text-align: right;
+}
+
+label.form-label{
+    color: #160a48;
+    font-weight: 600;
+}
+
+input.form-control, select.form-control{
+    border: 1px solid #160a48;
+    color: black;
+}
+
+.m-b-16{
+    margin-bottom: 16px;
+}

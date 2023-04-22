@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background-color: #ededed;
+}
+
+.page-content{
+    margin: 32px 0;
+}
+
+/*-- MENU --*/
+.menu {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(270deg, #3409de 0%, #160a48 100%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    align-items: center;
+    padding: 8px 32px;
+}
+
+.menu__logo,
+.menu__list {
+    display: block;
+}
+
+.menu__list.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.list li {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.list li:first-child {
+    margin-left: 0;
+}
+
+.list__item a{
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    padding: 8px 16px;
+    transition: 300ms;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.list__item a:hover {
+    color: #160a48;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.list__logo img {
+    height: 42px;
+    cursor: pointer;
+}
+/*-- End Menu --*/
+
+/*-- Buttons --*/
+button.btn_primary,
+button.btn_secondary,
+button.btn_danger {
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 300ms;
+}
+
+.btn_primary,
+.btn_secondary:hover {
+    color: white;
+    cursor: pointer;
+    background-color: #160a48;
+    border-radius: 4px;
+}
+
+button.btn_secondary,
+button.btn_primary:hover,
+button.btn_danger {
+    color: #160a48;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 4px;
+    border: 1px solid #160a48;
+}
+
+.btn_danger:hover{
+    background-color: rgb(215, 1, 1);
+    color: white;
+    border-color: rgb(215, 1, 1);
+}
+/*-- End Buttons --*/
+
+/*-- Issue --*/
+.issue {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: #ffffff;
+    border: 2px solid #1e0a6f;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.issue:hover {
+    cursor: pointer;
+    background-color: #ededed;
+}
+
+.issue__text {
+    width: 100%;
+    margin-left: 32px;
+}
+
+.issue__text .address {
+    font-weight: 400;
+    font-size: 22px;
+}
+/*-- End Issue --*/
+
+/*-- Titles --*/
+.page-title h1::after {
+    display: block;
+    background: linear-gradient(270deg, #3409de 0%, #160a48 100%);
+    width: 64px;
+    height: 5px;
+    content: "";
+    border-radius: 2px;
+    margin-bottom: 32px;
+}
+/*-- End Titles --*/
