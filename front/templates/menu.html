@@ -1,0 +1,108 @@
+<nav class="menu">
+    <div class="menu__logo"><a href="index.html"><img src="/front/galery/logo.svg" alt="logo" /></a></div>
+    <ul class="menu__list list">
+        <li class="list__btn">
+            <button class="btn_secondary" id="issue-btn" onclick="toggleModal('show', true)">Cadastrar buraco</button>
+        </li>
+        <li class="list__item"><a href="index.html">Todos</a></li>
+        <li class="list__item"><a href="my-issues.html" id="my-issues">Meus envios</a></li>
+        <li class="list__logo"><a href="profile.html" id="menu-pic"></a></li>
+    </ul>
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="issue-form" tabindex="-1" aria-labelledby="Formulário para edição ou cadastro de itens"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-title">
+                    <h2>Cadastrar buraco</h2>
+                    <button type="button" class="close" aria-label="Close" onclick="toggleModal('hide')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modal-form">
+                    <div class="section">
+                        <div class="row">
+                            <div class="col">
+                                <label for="name" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="name">
+                                <i>um apelido para facilitar a identificação</i>
+                            </div>
+                            <div class="col">
+                                <label for="type" class="form-label">Tipo</label>
+                                <select class="form-control" id="type" aria-label="Buraco" onchange="changeTitle()">
+                                    <option value="hole" selected>Buraco</option>
+                                    <option value="manhole">Tampa de bueiro solta</option>
+                                    <option value="tree">Árvore na rua</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="type" class="form-label">Status</label>
+                                <select class="form-control" id="status" onchange="changeTitle()">
+                                    <option value="fixed" selected>Corrigido</option>
+                                    <option value="pending">Pendente</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="row">
+                            <!-- Just to control if user is editing or creating issues -->
+                            <div class="hide">
+                                <input type="checkbox" class="form-check-input" id="edit">
+                            </div>
+
+                            <div class="col">
+                                <label for="zipcode" class="form-label">CEP</label>
+                                <input type="text" maxlength="9" class="form-control" id="zipcode"
+                                    onchange="searchAddress()">
+                                <i id="error" class="error-msg"></i>
+                            </div>
+                        </div>
+                        <div class="form-check m-b-16">
+                            <input type="checkbox" class="form-check-input" id="useZipCode" checked
+                                onchange="unlockFields()">
+                            <label class="form-check-label" for="useZipCode">Pesquisar por CEP</label>
+                        </div>
+
+                        <div class="row m-b-16">
+                            <div class="col">
+                                <label for="street" class="form-label">Rua</label>
+                                <input type="text" class="form-control blocked" id="street" disabled>
+                            </div>
+                            <div class="col">
+                                <label for="neighborhood" class="form-label">Bairro</label>
+                                <input type="text" class="form-control blocked" id="neighborhood" disabled>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="city" class="form-label">Cidade</label>
+                                <input type="text" class="form-control blocked" id="city" disabled>
+                            </div>
+                            <div class="col">
+                                <label for="state" class="form-label">Estado</label>
+                                <input type="text" maxlength="2" class="form-control blocked" id="state" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-rows">
+                        <button onclick="toggleModal('hide')" class="btn_danger">Fechar</button>
+                        <button onclick="sendForm()" class="btn_primary">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @import url(/front/style/form.css);
+</style>
+
+<script>
+    setProfilePic()
+</script>

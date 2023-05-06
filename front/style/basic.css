@@ -9,6 +9,7 @@ body {
 
 body {
     background-color: #ededed;
+    padding-top: 66px; /* menu height*/
 }
 
 .page-content{
@@ -23,6 +24,10 @@ body {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     align-items: center;
     padding: 8px 32px;
+    top: 0;
+    z-index: 20;
+    position: fixed;
+    width: 100%;
 }
 
 .menu__logo,
@@ -75,7 +80,6 @@ body {
 button.btn_primary,
 button.btn_secondary,
 button.btn_danger {
-    border: none;
     border-radius: 4px;
     padding: 8px 16px;
     font-weight: bold;
@@ -84,11 +88,13 @@ button.btn_danger {
 }
 
 .btn_primary,
-.btn_secondary:hover {
+.btn_secondary:hover,
+.menu .btn_secondary:hover {
     color: white;
     cursor: pointer;
     background-color: #160a48;
     border-radius: 4px;
+    border: 1px solid #160a48;
 }
 
 button.btn_secondary,
@@ -106,6 +112,10 @@ button.btn_danger {
     color: white;
     border-color: rgb(215, 1, 1);
 }
+
+.menu .btn_secondary{
+    border: 1px solid white;
+}
 /*-- End Buttons --*/
 
 /*-- Issue --*/
@@ -122,8 +132,20 @@ button.btn_danger {
 }
 
 .issue:hover {
-    cursor: pointer;
     background-color: #ededed;
+}
+
+.issue.editable{
+    cursor: pointer;
+}
+
+.issue__icon {
+    width: 135px;
+    text-align: center;
+}
+
+.issue__icon img{
+    height: 68px;
 }
 
 .issue__text {
@@ -148,3 +170,7 @@ button.btn_danger {
     margin-bottom: 32px;
 }
 /*-- End Titles --*/
+
+.hide{
+    display: none;
+}

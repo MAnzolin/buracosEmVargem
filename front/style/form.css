@@ -1,17 +1,18 @@
-.modal-content{
+.modal-content,
+.user-info {
     border: 1px solid #160a48;
     border-radius: 8px;
 }
 
-.modal-body{
+.modal-body {
     padding: 32px;
 }
 
-.form-title{
+.form-title {
     position: relative;
 }
 
-.form-title .close{
+.form-title .close {
     font-size: 40px;
     position: absolute;
     right: 0;
@@ -20,25 +21,36 @@
 
 .section {
     padding: 16px 16px 32px 16px;
-    border: 1px solid #160a48;;
+    border: 1px solid #160a48;
     border-radius: 8px;
     margin: 16px 0px;
 }
 
-.btn-rows{
+.btn-rows {
     text-align: right;
 }
 
-label.form-label{
+label.form-label {
     color: #160a48;
     font-weight: 600;
 }
 
-input.form-control, select.form-control{
+input.form-control,
+select.form-control {
     border: 1px solid #160a48;
     color: black;
 }
 
-.m-b-16{
+.m-b-16 {
     margin-bottom: 16px;
+}
+
+.error-msg {
+    color: darkred;
+}
+
+input:disabled {
+    background: #c9c9c9;
+    cursor: not-allowed;
+    pointer-events: none;
 }
