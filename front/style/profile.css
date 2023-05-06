@@ -1,0 +1,23 @@
+.user-info, .profile-pic{
+    border: 1px solid #160a48;
+    border-radius: 8px;
+    display: block;
+    padding: 16px;
+}
+
+.profile-pic{
+    width: auto;
+    background: linear-gradient(270deg, #9f86ff 0%, #6f53e6 100%);
+}
+
+.row{
+    margin-top: 16px;
+}
+
+.row.btn-row{
+    padding-right: 16px;
+}
+
+.profile-pic img {
+    width: 100px;
+}
