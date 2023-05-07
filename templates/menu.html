@@ -1,14 +1,13 @@
 {% load static %}
-{% load url %}
 <nav class="menu">
-    <div class="menu__logo"><a href="index.html"><img src="/static/galery/logo.svg" alt="logo" /></a></div>
+    <div class="menu__logo"><a href="/"><img src="{% static 'galery/logo.svg' %}" alt="logo" /></a></div>
     <ul class="menu__list list">
         <li class="list__btn">
             <button class="btn_secondary" id="issue-btn" onclick="toggleModal('show', true)">Cadastrar buraco</button>
         </li>
-        <li class="list__item"><a href="{% url 'index.html'%}">Todos</a></li>
-        <li class="list__item"><a href="{% url 'my-issues.html'%}" id="my-issues">Meus envios</a></li>
-        <li class="list__logo"><a href="{% url 'profile.html'%}" id="menu-pic"></a></li>
+        <li class="list__item"><a href="/">Todos</a></li>
+        <li class="list__item"><a href="my-issues" id="my-issues">Meus envios</a></li>
+        <li class="list__logo"><a href="profile" id="menu-pic"></a></li>
     </ul>
 </nav>
 
@@ -101,10 +100,7 @@
     </div>
 </div>
 
-<style>
-    @import url(/static/style/form.css);
-</style>
-
+<!-- Script onLoad -->
 <script>
     setProfilePic()
 </script>

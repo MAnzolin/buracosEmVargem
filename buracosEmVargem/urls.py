@@ -24,5 +24,6 @@ urlpatterns = [
     path('login', views.login),
     path('menu', views.menu),
     path('my-issues', views.myIssues),
-    path('profile', views.profile)
+    path('profile', views.profile),
+    path('sing-up', views.singUp)
 ]

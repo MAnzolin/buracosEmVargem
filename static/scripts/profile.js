@@ -1,15 +1,3 @@
-/*function userSession(){
-    return { logged: false, "sex": "default"};
-    return {
-        "logged": true,
-        "name": "Maria da Silva",
-        "cpf": "123.456.789-98",
-        "username": "maria.d.silva",
-        "sex": "woman"
-    }
-}*/
-
-
 function setValues(){
     let user = userSession();
     if(user){
@@ -19,7 +7,7 @@ function setValues(){
         $("#sex").val(user.sex);
     }
 
-    $(".profile-pic").html(`<img src="/front/galery/profile-${user.sex}.svg" alt="profile"></img>`)
+    $(".profile-pic").html(`<img src="/static/galery/profile-${user.sex}.svg" alt="profile"></img>`)
 }
 
 function sendForm(){

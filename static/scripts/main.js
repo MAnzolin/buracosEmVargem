@@ -92,7 +92,7 @@ export class Issue {
 
         return `<div class="issue ${this.id} ${editable}" onclick="${onclickF}">
                     <div class="issue__icon">
-                        <img src="/front/galery/${typeIcon}" alt="issue icon">
+                        <img src="/static/galery/${typeIcon}" alt="issue icon">
                     </div>
                     <div class="issue__text">
                         <div class="address">${this.address.getStringAddres()}</div>
@@ -101,10 +101,10 @@ export class Issue {
                         <div class="simple-text">Data de envio: ${this.getPrettyDate()}</div>
                     </div>
                     <div class="issu__status">
-                        <img src="/front/galery/${faceIcon}" alt="status">
+                        <img src="/static/galery/${faceIcon}" alt="status">
                     </div>
                 </div>`;
     }
 }
 
-//appendHtmlContent("static/menu.html", "menu");
+appendHtmlContent("menu", "menu");

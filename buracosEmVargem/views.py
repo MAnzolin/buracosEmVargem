@@ -14,3 +14,6 @@ def myIssues(request):
 
 def profile(request):
     return render(request, "profile.html")
+
+def singUp(request):
+    return render(request, "sing-up.html")
