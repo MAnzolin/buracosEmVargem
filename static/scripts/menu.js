@@ -118,6 +118,6 @@ function setProfilePic() {
         $("#issue-btn").toggle("hide");
     }
 
-    $("#menu-pic").html(`<img src="/front/galery/profile-${user.sex}-menu.svg" alt="profile" />`);
+    $("#menu-pic").html(`<img src="static/galery/profile-${user.sex}-menu.svg" alt="profile" />`);
 
 }

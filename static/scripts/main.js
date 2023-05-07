@@ -107,4 +107,4 @@ export class Issue {
     }
 }
 
-appendHtmlContent("menu.html", "menu");
+//appendHtmlContent("static/menu.html", "menu");
