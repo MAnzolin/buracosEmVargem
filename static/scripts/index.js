@@ -15,47 +15,39 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function loadIssues() {
-    let name = "Buraco 1";
-    let photos = [];
-    let type = "hole";
-    let createdAt = new Date("2020-12-03 00:00:00");
-    let address = {
-        "street": "Rua Bananeira",
-        "neighborhood": "Jardim Holanda",
-        "city": "Vargem Grande Paulista",
-        "state": "SP",
-        "zipCode": "00000000"
-    }
-
-
-    let item1 = new Issue(name, address, photos, type, "fixed", "Julia Nogueira", createdAt, "123");
-    let item2 = new Issue(name, address, photos, type, "pending", "Maria da Silva", createdAt, "321");
-    let item3 = new Issue(name, address, photos, "tree", "fixed", "Maria da Silva", createdAt, "222");
-    let item4 = new Issue(name, address, photos, "manhole", "fixed", "Julia Nogueira", createdAt, "111");
-    let issues = [item1, item2, item3, item4];
-
-
-    
-    issues.forEach(item => {
-        $(`#issues-list`).append(item.getIssueHTML());
-    });
-
-    const csrftoken = getCookie('csrftoken');
-    
-    let http = new XMLHttpRequest();
-    http.open("POST", "insert-issues", true);
-    http.setRequestHeader("Content-Type", "application/json");
-    http.setRequestHeader("X-CSRFToken", csrftoken);
-    http.onload = () => {
-        if (http.readyState === XMLHttpRequest.DONE && http.status === 200) {
-           console.log(http.response);
+function updateIssues(issue){
+    let request = new XMLHttpRequest();
+    request.open("POST", "update-issues", true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.setRequestHeader("X-CSRFToken", csrftoken);
+    request.onload = () => {
+        if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+           console.log(request.response);
         }
     };
 
-    let body = JSON.stringify({data: item4})
-    http.send(body);
-
+    let body = JSON.stringify({data: issue})
+    request.send(body);
 }
 
+function loadIssues() {
+    let request = new XMLHttpRequest();
+    request.open("GET", "get-issues", true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.setRequestHeader("X-CSRFToken", csrftoken);
+    request.onload = () => {
+        if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+            console.log()
+            let issues = JSON.parse(request.response);
+            issues.forEach(item => {
+                let issue = new Issue(item.name,item.address,null,item.type,item.status,item.send_by_id,item.created_at,item.id)
+                $(`#issues-list`).append(issue.getIssueHTML());
+            });
+        }
+    };
+
+    request.send();
+}
+
+const csrftoken = getCookie('csrftoken');
 loadIssues();

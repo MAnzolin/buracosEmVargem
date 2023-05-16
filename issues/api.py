@@ -30,6 +30,13 @@ def insertIssue(request):
             )
             issueRecord.save()
         
-        #issue = Issue(name=data['name'],classification=data['name'],name=data['name'])
         return JsonResponse({'answer': issueAddress.id})
 
+def getIssues(request):
+    if request.method == 'GET':
+        allIssues = list(Issue.objects.all().values())
+        for i in range(len(allIssues)):
+            current = allIssues[i]
+            allIssues[i]['address'] = list(Address.objects.filter(id=current['address_id']).values())[0]
+
+        return JsonResponse(allIssues, safe=False)

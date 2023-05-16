@@ -9,6 +9,6 @@ urlpatterns = [
     path('my-issues', views.myIssues),
     path('profile', views.profile),
     path('sing-up', views.singUp),
-    path('get-issues', views.getIssues),
+    path('get-issues', api.getIssues),
     path('insert-issues', api.insertIssue)
 ]
