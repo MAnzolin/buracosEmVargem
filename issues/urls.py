@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from . import api
 
 urlpatterns = [
     path('', views.index),
@@ -8,5 +9,6 @@ urlpatterns = [
     path('my-issues', views.myIssues),
     path('profile', views.profile),
     path('sing-up', views.singUp),
-    path('get-issues', views.getIssues)
+    path('get-issues', views.getIssues),
+    path('insert-issues', api.insertIssue)
 ]

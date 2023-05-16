@@ -1,7 +1,7 @@
 from django.db import models
 import datetime
 
-class Users(models.Model):
+class User(models.Model):
    name = models.CharField(max_length=100)
    username = models.CharField(max_length=40)
    sex = models.CharField(max_length=4)
@@ -16,14 +16,11 @@ class Address(models.Model):
    zip_code = models.CharField(max_length=8)
    id = models.AutoField(primary_key=True)
 
-class Issues(models.Model):
+class Issue(models.Model):
    name = models.CharField(max_length=100)
-   classification = models.CharField(max_length=100)
-   language = models.CharField(max_length=100)
    address = models.ForeignKey(Address, on_delete=models.DO_NOTHING)
    issue_type = models.CharField(max_length=40)
    status = models.CharField(max_length=40)
-   send_by = models.ForeignKey(Users, on_delete=models.CASCADE)
+   send_by = models.ForeignKey(User, on_delete=models.CASCADE)
    created_at = models.DateTimeField(default=datetime.date.today())
-   my_issue = models.BooleanField(default=False)
    id = models.AutoField(primary_key=True)

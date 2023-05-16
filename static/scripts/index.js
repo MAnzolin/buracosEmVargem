@@ -25,7 +25,7 @@ function loadIssues() {
         "neighborhood": "Jardim Holanda",
         "city": "Vargem Grande Paulista",
         "state": "SP",
-        "zipCode": "00000-000"
+        "zipCode": "00000000"
     }
 
 
@@ -35,6 +35,7 @@ function loadIssues() {
     let item4 = new Issue(name, address, photos, "manhole", "fixed", "Julia Nogueira", createdAt, "111");
     let issues = [item1, item2, item3, item4];
 
+
     
     issues.forEach(item => {
         $(`#issues-list`).append(item.getIssueHTML());
@@ -43,7 +44,7 @@ function loadIssues() {
     const csrftoken = getCookie('csrftoken');
     
     let http = new XMLHttpRequest();
-    http.open("POST", "get-issues", true);
+    http.open("POST", "insert-issues", true);
     http.setRequestHeader("Content-Type", "application/json");
     http.setRequestHeader("X-CSRFToken", csrftoken);
     http.onload = () => {
@@ -52,7 +53,7 @@ function loadIssues() {
         }
     };
 
-    let body = JSON.stringify({data: issues})
+    let body = JSON.stringify({data: item4})
     http.send(body);
 
 }
