@@ -40,7 +40,7 @@ function loadIssues() {
             console.log()
             let issues = JSON.parse(request.response);
             issues.forEach(item => {
-                let issue = new Issue(item.name,item.address,null,item.type,item.status,item.send_by_id,item.created_at,item.id)
+                let issue = new Issue(item.name,item.address,null,item.type,item.status,item.send_by,item.created_at,item.id)
                 $(`#issues-list`).append(issue.getIssueHTML());
             });
         }

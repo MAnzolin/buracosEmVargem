@@ -38,5 +38,6 @@ def getIssues(request):
         for i in range(len(allIssues)):
             current = allIssues[i]
             allIssues[i]['address'] = list(Address.objects.filter(id=current['address_id']).values())[0]
+            allIssues[i]['send_by'] = list(User.objects.filter(id=current['send_by_id']).values_list('name'))[0]
 
         return JsonResponse(allIssues, safe=False)
