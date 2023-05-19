@@ -1,31 +1,30 @@
-export function appendHtmlContent(page,id){
-    if(!page || !id) return;
+export function appendHtmlContent(page, id) {
+    if (!page || !id) return;
 
     const contentReq = new XMLHttpRequest();
     contentReq.open('GET', page, true);
-    contentReq.onreadystatechange= function() {
-        if (this.readyState!==4) return;
-        if (this.status!==200) return;
-        if($(`#${id}`))
+    contentReq.onreadystatechange = function () {
+        if (this.readyState !== 4) return;
+        if (this.status !== 200) return;
+        if ($(`#${id}`))
             $(`#${id}`).append(this.responseText);
     };
     contentReq.send();
 }
 
-export function userSession(){
-    //return { logged: false, "sex": "default"};
-    return {
-        "logged": true,
-        "name": "Maria da Silva",
-        "cpf": "123.456.789-98",
-        "username": "maria.d.silva",
-        "sex": "woman"
+export function userSession() {
+    let session = localStorage.getItem('user-session-bv');
+    if (session) {
+        session = JSON.parse(session);
+        return session;
     }
+
+    return { logged: false, "sex": "default" };
 }
 
 class Address {
-    constructor(address){
-        if(!address || typeof address != "object") address = {};
+    constructor(address) {
+        if (!address || typeof address != "object") address = {};
 
         this.street = address.street || address.logradouro || "";
         this.neighborhood = address.neighborhood || address.bairro || "";
@@ -34,7 +33,7 @@ class Address {
         this.zipCode = address.zipCode || address.cep || "";
     }
 
-    getAddressJSON(){
+    getAddressJSON() {
         return {
             "street": this.street,
             "neighborhood": this.neighborhood,
@@ -44,13 +43,13 @@ class Address {
         }
     }
 
-    getStringAddres(){
+    getStringAddres() {
         return `${this.street}, ${this.neighborhood}, ${this.city} - ${this.state}, ${this.zipCode}`
     }
 }
 
 export class Issue {
-    constructor(name, address, photos, type, status, sendBy, createdAt, id){
+    constructor(name, address, photos, type, status, sendBy, createdAt, id) {
         let user = userSession();
 
         this.name = name;
@@ -64,7 +63,7 @@ export class Issue {
         this.id = id;
     }
 
-    getIssueJSON(){
+    getIssueJSON() {
         return {
             "name": this.name,
             "address": this.address.getAddressJSON(),
@@ -72,13 +71,13 @@ export class Issue {
         }
     }
 
-    getPrettyDate(){
+    getPrettyDate() {
         let date = this.createdAt.toLocaleString("pt-BR");
         date = date.slice(0, date.length - 3);
-        return  date;
+        return date;
     }
 
-    getIssueHTML(){
+    getIssueHTML() {
         let onclickF = this.myIssue ? `editForm(${this.id})` : "false";
         let faceIcon = this.status == "fixed" ? "happy-face.svg" : "unhappy-face.svg";
         let editable = this.myIssue ? "editable" : "";

@@ -10,5 +10,7 @@ urlpatterns = [
     path('profile', views.profile),
     path('sing-up', views.singUp),
     path('get-issues', api.getIssues),
-    path('insert-issues', api.insertIssue)
+    path('insert-issues', api.insertIssue),
+    path('insert-user', api.insertUser),
+    path('get-session', api.getSession)
 ]

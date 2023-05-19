@@ -6,6 +6,7 @@ class User(models.Model):
    username = models.CharField(max_length=40)
    sex = models.CharField(max_length=4)
    cpf = models.CharField(max_length=11)
+   password = models.CharField(max_length=40,default='123')
    id = models.AutoField(primary_key=True) 
 
 class Address(models.Model):

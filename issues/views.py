@@ -19,9 +19,3 @@ def profile(request):
 
 def singUp(request):
     return render(request, "sing-up.html")
-
-def getIssues(request):
-    if request.method == 'POST':
-        json_data = json.loads(request.body.decode("utf-8"))
-        return JsonResponse(json_data)
-        #return HttpResponse(json_data['data'])

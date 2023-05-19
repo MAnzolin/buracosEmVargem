@@ -100,19 +100,18 @@ function unlockFields() {
 }
 
 function userSession() {
-    //return { logged: false, "sex": "default" };
-    return {
-        "logged": true,
-        "name": "Maria da Silva",
-        "cpf": "123.456.789-98",
-        "username": "maria.d.silva",
-        "sex": "woman"
+    let session = localStorage.getItem('user-session-bv');
+    if (session) {
+        session = JSON.parse(session);
+        return session;
     }
+
+    return { logged: false, "sex": "default" };
 }
 
 function setProfilePic() {
     let user = userSession();
-    if (!user.logged){
+    if (!user.logged) {
         $("#menu-pic").attr("href", "login");
         $("#my-issues").toggle("hide");
         $("#issue-btn").toggle("hide");

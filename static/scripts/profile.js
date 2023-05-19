@@ -10,6 +10,11 @@ function setValues(){
     $(".profile-pic").html(`<img src="/static/galery/profile-${user.sex}.svg" alt="profile"></img>`)
 }
 
+function logout(){
+    localStorage.removeItem('user-session-bv');
+    window.location.href = "/";
+}
+
 function sendForm(){
     
 }

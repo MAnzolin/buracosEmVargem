@@ -37,7 +37,6 @@ function loadIssues() {
     request.setRequestHeader("X-CSRFToken", csrftoken);
     request.onload = () => {
         if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-            console.log()
             let issues = JSON.parse(request.response);
             issues.forEach(item => {
                 let issue = new Issue(item.name,item.address,null,item.type,item.status,item.send_by,item.created_at,item.id)

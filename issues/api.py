@@ -41,3 +41,38 @@ def getIssues(request):
             allIssues[i]['send_by'] = list(User.objects.filter(id=current['send_by_id']).values_list('name'))[0]
 
         return JsonResponse(allIssues, safe=False)
+
+def insertUser(request):
+    if request.method == 'POST':
+            json_data = json.loads(request.body.decode("utf-8"))
+            data = json_data['data']
+
+            users = list(User.objects.filter(username=data['username']).values())
+            if(users.__len__() > 0):
+                return JsonResponse({'error': True, 'msg': 'Username indisponivel.'})
+
+            person = User(name=data['name'],username=data['username'],password=data['password'],sex=data['sex'],cpf=data['cpf'])
+            person.save()
+            return JsonResponse({'answer': {
+                'name': person.name,
+                'sex': person.sex,
+                'id': person.id,
+                'logged': True
+            }}, safe=False)
+
+def getSession(request):
+    if request.method == 'POST':
+            json_data = json.loads(request.body.decode("utf-8"))
+            data = json_data['data']
+
+            user = list(User.objects.filter(username=data['username'],password=data['password']).values())[0]
+            if(user and user['id']):
+                return JsonResponse({'answer': user}, safe=False)
+            else:
+                return JsonResponse(
+                    {
+                        'answer': {
+                            'sex': 'default',
+                            'logged': True
+                        }
+                    }, safe=False)
