@@ -60,19 +60,45 @@ def insertUser(request):
                 'logged': True
             }}, safe=False)
 
-def getSession(request):
+def updateUser(request):
     if request.method == 'POST':
             json_data = json.loads(request.body.decode("utf-8"))
             data = json_data['data']
 
-            user = list(User.objects.filter(username=data['username'],password=data['password']).values())[0]
-            if(user and user['id']):
-                return JsonResponse({'answer': user}, safe=False)
+            user = User.objects.get(id=data['id'])
+            if (user.id):
+                if(data['name']):
+                    user.name = data['name']
+                if(data['username']):
+                    user.username = data['username']
+                if(data['sex']):
+                    user.sex = data['sex']
+                if(data['cpf']):
+                    user.cpf = data['cpf']
+                if(data['password']):
+                    user.password = data['password']
+                user.save()
+                return JsonResponse({'answer': { 'msg': 'Usuário atualizado com sucesso', 'updated': True}}, safe=False)
             else:
-                return JsonResponse(
-                    {
-                        'answer': {
-                            'sex': 'default',
-                            'logged': True
-                        }
-                    }, safe=False)
+                return JsonResponse({'answer': {'error': True, 'msg': 'Erro ao atualizar.'}})
+
+def getSession(request):
+    if request.method == 'POST':
+            json_data = json.loads(request.body.decode("utf-8"))
+            data = json_data['data']
+            errorJS = {'answer': {'sex': 'default', 'logged': True, 'msg': 'Usuário não encontrado ou senha inválida.'}}
+
+            try:
+                user = User.objects.get(username=data['username'],password=data['password'])
+                if(user.id):
+                    return JsonResponse({'answer': {
+                        'name': user.name,
+                        'sex': user.sex,
+                        'cpf': user.cpf,
+                        'username': user.username,
+                        'id': user.id
+                    }}, safe=False)
+                else:
+                    return JsonResponse(errorJS, safe=False)
+            except:
+                return JsonResponse(errorJS, safe=False)

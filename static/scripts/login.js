@@ -16,6 +16,9 @@ function sendForm(){
                 setSession(response.answer);
                 window.location.href = "/";
             }
+            else{
+                alert(response.answer.msg)
+            }
         }
     };
 
