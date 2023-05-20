@@ -30,7 +30,7 @@ class Address {
         this.neighborhood = address.neighborhood || address.bairro || "";
         this.city = address.city || address.localidade || "";
         this.state = address.state || address.uf || "";
-        this.zipCode = address.zipCode || address.cep || "";
+        this.zipCode = address.zipCode || address.zip_code || address.cep || "";
     }
 
     getAddressJSON() {

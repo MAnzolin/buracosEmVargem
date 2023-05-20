@@ -15,31 +15,17 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function updateIssues(issue){
-    let request = new XMLHttpRequest();
-    request.open("POST", "update-issues", true);
-    request.setRequestHeader("Content-Type", "application/json");
-    request.setRequestHeader("X-CSRFToken", csrftoken);
-    request.onload = () => {
-        if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-           console.log(request.response);
-        }
-    };
-
-    let body = JSON.stringify({data: issue})
-    request.send(body);
-}
-
 function loadIssues() {
     let request = new XMLHttpRequest();
-    request.open("GET", "get-issues", true);
+    request.open("GET", "get-all-issues", true);
     request.setRequestHeader("Content-Type", "application/json");
     request.setRequestHeader("X-CSRFToken", csrftoken);
     request.onload = () => {
         if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
             let issues = JSON.parse(request.response);
             issues.forEach(item => {
-                let issue = new Issue(item.name,item.address,null,item.type,item.status,item.send_by,item.created_at,item.id)
+                console.log(item)
+                let issue = new Issue(item.name,item.address,null,item.issue_type,item.status,item.send_by,item.created_at,item.id)
                 $(`#issues-list`).append(issue.getIssueHTML());
             });
         }
