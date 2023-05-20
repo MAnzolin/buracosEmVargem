@@ -18,6 +18,10 @@
     padding-right: 16px;
 }
 
+.btn_danger{
+    margin-right: 16px;
+}
+
 .profile-pic img {
     width: 100px;
 }

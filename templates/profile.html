@@ -1,4 +1,5 @@
 {% load static %}
+{% csrf_token %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -45,8 +46,8 @@
     <div class="container user-info page-content">
         <div class="row">
             <div class="col">
-                <label for="name" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="name">
+                <label for="fullname" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="fullname">
             </div>
             <div class="col">
                 <label for="cpf" class="form-label">CPF</label>
@@ -77,6 +78,7 @@
             </div>
         </div>
         <div class="justify-content-end btn-row row">
+            <button onclick="logout()" class="btn_danger">Sair</button>
             <button onclick="sendForm()" class="btn_primary">Salvar</button>
         </div>
     </div>

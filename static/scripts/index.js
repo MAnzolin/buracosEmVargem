@@ -1,28 +1,38 @@
 import { Issue } from "./main.js";
-
-function loadIssues() {
-    let name = "Buraco 1";
-    let photos = [];
-    let type = "hole";
-    let createdAt = new Date("2020-12-03 00:00:00");
-    let address = {
-        "street": "Rua Bananeira",
-        "neighborhood": "Jardim Holanda",
-        "city": "Vargem Grande Paulista",
-        "state": "SP",
-        "zipCode": "00000-000"
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
     }
-
-
-    let item1 = new Issue(name, address, photos, type, "fixed", "Julia Nogueira", createdAt, "123");
-    let item2 = new Issue(name, address, photos, type, "pending", "Maria da Silva", createdAt, "321");
-    let item3 = new Issue(name, address, photos, "tree", "fixed", "Maria da Silva", createdAt, "222");
-    let item4 = new Issue(name, address, photos, "manhole", "fixed", "Julia Nogueira", createdAt, "111");
-    let issues = [item1, item2, item3, item4];
-
-    issues.forEach(item => {
-        $(`#issues-list`).append(item.getIssueHTML());
-    })
+    return cookieValue;
 }
 
+function loadIssues() {
+    let request = new XMLHttpRequest();
+    request.open("GET", "get-all-issues", true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.setRequestHeader("X-CSRFToken", csrftoken);
+    request.onload = () => {
+        if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+            let issues = JSON.parse(request.response);
+            issues.forEach(item => {
+                console.log(item)
+                let issue = new Issue(item.name,item.address,null,item.issue_type,item.status,item.send_by,item.created_at,item.id)
+                $(`#issues-list`).append(issue.getIssueHTML());
+            });
+        }
+    };
+
+    request.send();
+}
+
+const csrftoken = getCookie('csrftoken');
 loadIssues();

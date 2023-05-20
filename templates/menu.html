@@ -53,6 +53,7 @@
                             <!-- Just to control if user is editing or creating issues -->
                             <div class="hide">
                                 <input type="checkbox" class="form-check-input" id="edit">
+                                <input type="text" class="form-input" id="issue-id">
                             </div>
 
                             <div class="col">
@@ -92,7 +93,7 @@
                     </div>
                     <div class="btn-rows">
                         <button onclick="toggleModal('hide')" class="btn_danger">Fechar</button>
-                        <button onclick="sendForm()" class="btn_primary">Salvar</button>
+                        <button onclick="sendFormIssue()" class="btn_primary">Salvar</button>
                     </div>
                 </div>
             </div>
