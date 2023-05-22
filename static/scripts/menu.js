@@ -56,6 +56,12 @@ function editForm(id) {
 
 function toggleModal(modalAction, reset) {
     if (reset) resetForm(type);
+    if ($("#edit").is(":checked")) {
+        $(".btn-rows .left-side button").removeClass('hide')
+    }
+    else{
+        $(".btn-rows .left-side button").addClass('hide')
+    }
     $("#issue-form").modal(modalAction);
 }
 
@@ -169,12 +175,31 @@ function sendFormIssue() {
             let issue = request.response || "";
             issue = JSON.parse(issue).answer;
             alert(`Registro ${action} com sucesso`);
-            window.location.href = "/";
+            window.location.reload();
         }
     };
 
     let body = JSON.stringify({ data: form });
     request.send(body);
+}
+
+function deleteIssue() {
+    let confirm = prompt("Você realmente deseja excluir este item? (digiete \"Sim\" ou \"Não\"", "Não");
+    if (confirm === "Sim") {
+        let request = new XMLHttpRequest();
+        request.open("DELETE", `delete-issue?id=${$("#issue-id").val()}`, true);
+        request.setRequestHeader("Content-Type", "application/json");
+        request.setRequestHeader("X-CSRFToken", csrftokenMenu);
+        request.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let answer = request.response || "";
+                answer = JSON.parse(answer).answer;
+                alert(answer.msg);
+                window.location.reload();
+            }
+        };
+        request.send();
+    }
 }
 
 const csrftokenMenu = getCookieMenu('csrftoken');

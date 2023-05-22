@@ -27,7 +27,8 @@
 }
 
 .btn-rows {
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
 }
 
 label.form-label {

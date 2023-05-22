@@ -92,8 +92,13 @@
                         </div>
                     </div>
                     <div class="btn-rows">
-                        <button onclick="toggleModal('hide')" class="btn_danger">Fechar</button>
-                        <button onclick="sendFormIssue()" class="btn_primary">Salvar</button>
+                        <div class="left-side">
+                            <button onclick="deleteIssue()" class="btn_danger">Excluir</button>
+                        </div>
+                        <div class="right-side">
+                            <button onclick="toggleModal('hide')" class="btn_danger">Fechar</button>
+                            <button onclick="sendFormIssue()" class="btn_primary">Salvar</button>
+                        </div>
                     </div>
                 </div>
             </div>

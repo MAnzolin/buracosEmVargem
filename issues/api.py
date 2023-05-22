@@ -79,8 +79,35 @@ def getAllIssues(request):
         allIssues = list(Issue.objects.all().values())
         for i in range(len(allIssues)):
             current = allIssues[i]
-            allIssues[i]['address'] = list(Address.objects.filter(id=current['address_id']).values())[0]
-            allIssues[i]['send_by'] = list(User.objects.filter(id=current['send_by_id']).values_list('name'))[0]
+            issueAddress = Address.objects.get(id=current['address_id'])
+            sendBy = User.objects.get(id=current['send_by_id'])
+            allIssues[i]['address'] = {
+                                        'zipCode': issueAddress.zip_code,
+                                        'street': issueAddress.street,
+                                        'city': issueAddress.city,
+                                        'neighborhood': issueAddress.neighborhood,
+                                        'state': issueAddress.state
+                                    }
+            allIssues[i]['send_by'] = {'id': sendBy.id, 'name': sendBy.name}
+
+        return JsonResponse(allIssues, safe=False)
+
+def getMyIssues(request):
+    if request.method == 'GET':
+        sendBy = request.GET['sendBy']
+        allIssues = list(Issue.objects.filter(send_by_id=sendBy).values())
+        for i in range(len(allIssues)):
+            current = allIssues[i]
+            issueAddress = Address.objects.get(id=current['address_id'])
+            sendBy = User.objects.get(id=current['send_by_id'])
+            allIssues[i]['address'] = {
+                                        'zipCode': issueAddress.zip_code,
+                                        'street': issueAddress.street,
+                                        'city': issueAddress.city,
+                                        'neighborhood': issueAddress.neighborhood,
+                                        'state': issueAddress.state
+                                    }
+            allIssues[i]['send_by'] = {'id': sendBy.id, 'name': sendBy.name}
 
         return JsonResponse(allIssues, safe=False)
 
@@ -90,12 +117,16 @@ def getIssue(request):
         record = Issue.objects.get(id=id)
         if record.id:
             issueAddress = Address.objects.get(id=record.address_id)
+            sendBy = User.objects.get(id=record.send_by_id)
             return JsonResponse({
                             'answer': {
                                 'name': record.name,
                                 'type': record.issue_type,
                                 'status': record.status,
-                                'sendBy': record.send_by_id,
+                                'sendBy': {
+                                    'id': sendBy.id,
+                                    'name': sendBy.name
+                                },
                                 'address': {
                                     'zipCode': issueAddress.zip_code,
                                     'street': issueAddress.street,
@@ -107,6 +138,15 @@ def getIssue(request):
                             }}, safe=False)
         return JsonResponse({'answer': {'error': True, 'msg': 'Não foi possível encontrar o seu item.'}})
 
+def deleteIssue(request):
+    if request.method == 'DELETE':
+        id = request.GET['id']
+        record = Issue.objects.get(id=id)
+        if record.id:
+            record.delete()
+            return JsonResponse({'answer':{'error': False, 'msg': 'Registro removido com sucesso.'}})
+        else:
+            return JsonResponse({'answer': {'error': True, 'msg': 'Não foi possível encontrar o seu item.'}})
 
 def insertUser(request):
     if request.method == 'POST':
