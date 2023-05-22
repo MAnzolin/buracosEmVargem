@@ -26,7 +26,6 @@ function loadMyIssues() {
         if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
             let issues = JSON.parse(request.response);
             issues.forEach(item => {
-                console.log(item)
                 let issue = new Issue(item.name,item.address,null,item.issue_type,item.status,item.send_by,item.created_at,item.id)
                 $(`#issues-list`).append(issue.getIssueHTML());
             });

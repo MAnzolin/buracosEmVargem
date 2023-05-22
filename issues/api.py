@@ -162,6 +162,8 @@ def insertUser(request):
             return JsonResponse({'answer': {
                 'name': person.name,
                 'sex': person.sex,
+                'cpf': person.cpf,
+                'username': person.username,
                 'id': person.id,
                 'logged': True
             }}, safe=False)
@@ -202,7 +204,8 @@ def getSession(request):
                         'sex': user.sex,
                         'cpf': user.cpf,
                         'username': user.username,
-                        'id': user.id
+                        'id': user.id,
+                        'logged': True
                     }}, safe=False)
                 else:
                     return JsonResponse(errorJS, safe=False)
