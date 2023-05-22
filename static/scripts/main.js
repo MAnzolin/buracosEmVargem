@@ -59,7 +59,7 @@ export class Issue {
         this.status = status || "pending";
         this.sendBy = sendBy;
         this.createdAt = new Date(createdAt);
-        this.myIssue = sendBy == user.name;
+        this.myIssue = sendBy.id == user.id;
         this.id = id;
     }
 
@@ -94,9 +94,10 @@ export class Issue {
                         <img src="/static/galery/${typeIcon}" alt="issue icon">
                     </div>
                     <div class="issue__text">
-                        <div class="address">${this.address.getStringAddres()}</div>
+                        <div class="address">${this.name}</div>
+                        <div class="simple-text">Endereço: ${this.address.getStringAddres()}</div>
                         <div class="simple-text">Tipo: ${type}</div>
-                        <div class="simple-text">Enviado por: ${this.sendBy}</div>
+                        <div class="simple-text">Enviado por: ${this.sendBy.name}</div>
                         <div class="simple-text">Data de envio: ${this.getPrettyDate()}</div>
                     </div>
                     <div class="issu__status">
