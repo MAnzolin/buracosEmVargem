@@ -67,7 +67,7 @@ function toggleModal(modalAction, reset) {
 
 function setAddress(cep) {
     let request = new XMLHttpRequest();
-    request.open("get", `http://viacep.com.br/ws/${cep}/json/`, true);
+    request.open("get", `https://viacep.com.br/ws/${cep}/json/`, true);
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             let address = request.responseText || "";
